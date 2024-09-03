@@ -16,7 +16,7 @@ class LocalNotificationService {
     streamController.add(notificationResponse);
   }
 
-  static Future init() async {
+  static Future<void> init() async {
     InitializationSettings settings = const InitializationSettings(
       android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       iOS: DarwinInitializationSettings(),
@@ -29,7 +29,7 @@ class LocalNotificationService {
   }
 
   //* show basic Notification
-  static void showBasicNotification(RemoteMessage message) async {
+  static Future<void> showBasicNotification(RemoteMessage message) async {
     StyleInformation? bigPictureStyleInformation =
         await fetchBigPictureStyleInfo(message);
     AndroidNotificationDetails android = AndroidNotificationDetails(
@@ -45,8 +45,8 @@ class LocalNotificationService {
     );
     await flutterLocalNotificationsPlugin.show(
       0,
-      message.notification!.title,
-      message.notification!.body,
+      message.data['title'],
+      message.data['body'],
       details,
     );
   }
@@ -60,7 +60,7 @@ class LocalNotificationService {
       //? Make a GET request to the image URL, expecting a byte response
       await dio
           .get(
-        message.notification!.android!.imageUrl!,
+        message.data['image_url'],
         options: Options(responseType: ResponseType.bytes),
       )
           .then(

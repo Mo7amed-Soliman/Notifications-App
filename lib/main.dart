@@ -11,9 +11,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  await PushNotificationsService.init();
-  await LocalNotificationService.init();
+  Future.wait([
+    PushNotificationsService.init(),
+    LocalNotificationService.init(),
+  ]);
 
   runApp(const MyApp());
 }

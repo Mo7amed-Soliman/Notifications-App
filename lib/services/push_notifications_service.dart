@@ -27,14 +27,17 @@ class PushNotificationsService {
     handleForegroundMessage();
   }
 
-  static Future<void> handlebackgroundMessage(RemoteMessage message) async {}
+  static Future<void> handlebackgroundMessage(RemoteMessage message) async {
+    //* show local notification
+    await LocalNotificationService.showBasicNotification(message);
+  }
 
   static void handleForegroundMessage() {
     //* on message listen for notification when app is in foreground
     FirebaseMessaging.onMessage.listen(
-      (RemoteMessage message) {
+      (RemoteMessage message) async {
         //* show local notification
-        LocalNotificationService.showBasicNotification(message);
+        await LocalNotificationService.showBasicNotification(message);
       },
     );
   }
@@ -44,3 +47,7 @@ class PushNotificationsService {
     //* send token to firebase
   }
 }
+ 
+
+//? Test push messages via Postman and Firebase Cloud Messaging API (V1)
+//! Link: https://medium.com/@sekitafilovic/send-push-messages-via-postman-and-firebase-cloud-messaging-api-v1-3c63bc69fec8
