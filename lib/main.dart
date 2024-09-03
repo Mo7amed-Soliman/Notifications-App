@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:notifications_app/firebase_options.dart';
+import 'package:notifications_app/services/local_notifications_service.dart';
 import 'package:notifications_app/services/push_notifications_service.dart';
 import 'package:notifications_app/views/puth_notifications_view.dart';
 
@@ -12,6 +13,7 @@ void main() async {
   );
 
   await PushNotificationsService.init();
+  await LocalNotificationService.init();
 
   runApp(const MyApp());
 }
