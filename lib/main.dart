@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:notifications_app/firebase_options.dart';
+import 'package:notifications_app/views/puth_notifications_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Notifications App',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(),
+      home: PuthNotificationsView(),
     );
   }
 }
