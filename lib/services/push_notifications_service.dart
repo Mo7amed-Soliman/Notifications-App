@@ -25,6 +25,14 @@ class PushNotificationsService {
 
     //* foreground
     handleForegroundMessage();
+
+    //* if the user is logged in
+    //* subscribe to topic
+    await messaging.subscribeToTopic('all_users');
+
+    //* if the user is logged out
+    //* unsubscribe from topic
+    //! await messaging.unsubscribeFromTopic('all_users');
   }
 
   static Future<void> handlebackgroundMessage(RemoteMessage message) async {
